@@ -5,12 +5,21 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const password1 = document.getElementById('password1');
     const password2 = document.getElementById('password2');
     const registroButton = document.getElementById('registroButton');
+    const tosButton = document.getElementById("tosButton");
 
     const checkbox = document.getElementById('terminos');
 
     function checkboxChecked(){
         if (!checkbox.checked) {
-            alert("Debes aceptar los términos y condiciones.");
+            checkbox.classList.remove("is-valid");
+            tosButton.classList.remove("is-valid");
+            checkbox.classList.add("is-invalid");
+            tosButton.classList.add("is-invalid");
+        }else{
+            checkbox.classList.remove("is-invalid");
+            tosButton.classList.remove("is-invalid");
+            checkbox.classList.add("is-valid");
+            tosButton.classList.add("is-valid");
         }
     };    
 
@@ -22,12 +31,23 @@ document.addEventListener("DOMContentLoaded", ()=>{
         password2
     ]
 
-    var hasClicked = 0;
+    checkbox.addEventListener("click", ()=>{
+        checkboxChecked();
+    })
 
-    registroButton.addEventListener('click', () => {
-        hasClicked = 1;
+    registroButton.addEventListener('click', (event) => {
         checkValidity(inputArray);
-        checkboxChecked()
+        checkboxChecked();
+        if(checkSubmit(inputArray) == 6){
+            console.log("valid!");
+        }else{
+            event.preventDefault();
+        }
+
+
+        document.addEventListener("keyup", ()=>{
+            checkValidity(inputArray);
+        })
     })
 })
 
@@ -57,15 +77,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
             password2.classList.add('is-invalid');  
         }
     
-        inputArray.forEach(input => {
-            console.log(input.value)
-            if(!input.value){
-                input.classList.remove("is-valid")
-                input.classList.add("is-invalid")
-            }
-        });
-
-    // Validaciones de nombre apellido y email
+        
+        // Validaciones de nombre apellido y email
     // Nombre
     if(nombre.value){
         nombre.classList.remove("is-invalid")
@@ -86,7 +99,26 @@ document.addEventListener("DOMContentLoaded", ()=>{
         email.classList.remove("is-valid")
         email.classList.add("is-invalid")
     }
+    inputArray.forEach(input => {
+        if(!input.value){
+            input.classList.remove("is-valid")
+            input.classList.add("is-invalid")
+        }
+    });
 }
 
-    
+function checkSubmit(inputArray){
+    let contador = 0
+    inputArray.forEach(element => {
+        if (element.classList.contains("is-valid")){
+            contador++
+        }});
 
+        if (tosButton.classList.contains("is-valid")){
+            contador++
+        }
+
+        return contador
+        
+    
+}

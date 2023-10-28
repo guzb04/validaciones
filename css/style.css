@@ -2,3 +2,6 @@
   max-width: 960px;
 }
 
+.tosButton.is-invalid{
+  color: red;
+}
