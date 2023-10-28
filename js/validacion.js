@@ -1,18 +1,45 @@
-const password1 = document.getElementById('password1');
-const password2 = document.getElementById('password2');
-const email = document.getElementById('email');
+document.addEventListener("DOMContentLoaded", ()=>{
+    const nombre = document.getElementById("nombre");
+    const apellido = document.getElementById("apellido");
+    const email = document.getElementById("email");
+    const password1 = document.getElementById('password1');
+    const password2 = document.getElementById('password2');
+    const registroButton = document.getElementById('registroButton');
+    const inputArray = [
+        nombre,
+        apellido,
+        email,
+        password1,
+        password2
+    ]
+    var hasClicked = 0
 
-const registroButton = document.getElementById('registroButton');
 
+    registroButton.addEventListener('click', () => {
+        hasClicked = 1
+        checkValidity(inputArray)
+        console.log(inputArray)
+        console.log(hasClicked)
 
-
-registroButton.addEventListener('click', () => {
-    if(password1.value == password2.value && password1.value.length>=6 ) {
-        alert("funcionen!");
-    }
-
-    if(email.value ==1){
-        alert("dsdsdsds")
-    }
+    })
 })
 
+function checkValidity(inputArray){
+    if(password1.value == password2.value && password1.value.length>=6 ) {
+        alert("funcionen!");
+    }else if (password1.value.length < 6) {
+        const invalidFeedback = document.getElementById('invalidFeedback');
+        invalidFeedback.textContent = "La contraseña debe tener al menos 6 caracteres.";
+    } else if (password1.value !== password2.value) {
+        const invalidFeedback = document.getElementById('invalidFeedback');
+        invalidFeedback.textContent = "Las contraseñas no coinciden.";
+        password2.classList.add('is-invalid');
+    }
+
+    inputArray.forEach(input => {
+        console.log(input.value)
+        if(!input.value){
+            input.classList.add("is-invalid")
+        }
+    });
+}
