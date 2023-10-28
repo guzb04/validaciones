@@ -12,9 +12,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         if (!checkbox.checked) {
             alert("Debes aceptar los términos y condiciones.");
         }
-    };
-    
-    
+    };    
 
     const inputArray = [
         nombre,
@@ -23,13 +21,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
         password1,
         password2
     ]
-    var hasClicked = 0;
 
+    var hasClicked = 0;
 
     registroButton.addEventListener('click', () => {
         hasClicked = 1;
         checkValidity(inputArray);
-
+        checkboxChecked()
     })
 })
 
@@ -77,7 +75,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     //Apellido
     if(apellido.value){
         apellido.classList.remove("is-invalid")
-        coso;
+        apellido.classList.add("is-valid");
     }
    
     //Email
