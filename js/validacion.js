@@ -26,16 +26,24 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 function checkValidity(inputArray){
     if(password1.value == password2.value && password1.value.length>=6 ) {
-        alert("funcionen!");
-    }else if (password1.value.length < 6) {
-        const invalidFeedback = document.getElementById('invalidFeedback');
-        invalidFeedback.textContent = "La contraseña debe tener al menos 6 caracteres.";
+
+        //Pone el input en verde si esta todo bien
+        password1.classList.add("is-valid");
+        password2.classList.add("is-valid");
+        
+    }else if (password1.value.length < 6 )  {
+        const invalidFeedback1 = document.getElementById('invalidFeedback1');
+        invalidFeedback1.textContent = "La contraseña debe tener al menos 6 caracteres.";
+        password1.classList.add('is-invalid');
+
+
     } else if (password1.value !== password2.value) {
-        const invalidFeedback = document.getElementById('invalidFeedback');
-        invalidFeedback.textContent = "Las contraseñas no coinciden.";
+
+        const invalidFeedback2 = document.getElementById('invalidFeedback2');
+        invalidFeedback2.textContent = "Las contraseñas no coinciden.";
         password2.classList.add('is-invalid');
     }
-
+ 
     inputArray.forEach(input => {
         console.log(input.value)
         if(!input.value){
